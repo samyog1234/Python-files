@@ -1,0 +1,6 @@
+age1=int(input("Enter age of first person:"))
+age2=int(input("Enter age of second person:"))
+age3=int(input("Enter age of third person:"))
+age4=int(input("Enter age of forth person:"))
+oldest_age=max(age1, age2, age3, age4)
+print("The oldest age is",oldest_age)
