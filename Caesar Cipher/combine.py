@@ -1,69 +1,59 @@
-# def wellcome():
-#     print("Welcome to the Caesar Cipher\nThis program encrypts and decrypts text with the Caesar Cipher.")
+def wellcome():
+    print("Welcome to the Caesar Cipher\nThis program encrypts and decrypts text with the Caesar Cipher.")
 
-
-# def enter_message():
-#     try:
-#         while True:
-#             d_or_e=input("Would you like to encrypt (e) or decrypt (d): ")
-
-#             if d_or_e=="d" or d_or_e =="e":
-#                 message=input("What message would you like to encrypt:")
-#                 uppermessage=message.upper()
-#                 while True:
-#                     try:
-#                         shift=int(input("What is the shift number:"))
-#                         print(d_or_e,uppermessage,shift)
-#                         break
-#                     except ValueError:
-#                         print("Invalid Mode")
-#                 break
-#             else:
-#                 print("Invalid Mode")
-#     except:
-#         pass
-#         return uppermessage,shift
-
-
-
-# def encrypt():
-#     upmess="hello"
-#     dict_upmess={letter: upmess.ord("h") for letter in set(upmess)}
-#     print(dict_upmess)
-    
-# encrypt()
-# uppermessage="HELLO"
-#     dict_uppermessage={letter: uppermessage.count(letter) for letter in set(uppermessage)}
-#     print(dict_uppermessage)
-
-# my_string = "HELLO"
-
-# print(my_dict)
-
-
-word = input("Enter a string: ")
-shift=int(input("Enter a shift to make a shift:"))
-word=word.capitalize()
-letter_list=list(word)
+wellcome()
 while True:
-    for char in word:
-        orde=int(ord(char))
-        if orde >90:
-            orde-=25
-            ch=chr(orde)
-            print(ch)
-        else:
-            prin=(orde+shift)
-            print(chr(prin))
-            break
+    def enter_message():
+        while True:
+            d_or_e = input("Would you like to encrypt (e) or decrypt (d): ")
 
+            if d_or_e == "d" or d_or_e == "e":
+                message = input("What message would you like to encrypt:")
+                uppermessage = message.upper()
+                while True:
+                    try:
+                        shift = int(input("What is the shift number:"))
+                        return uppermessage, shift, d_or_e
+                    except ValueError:
+                        print("Invalid Mode")
+            else:
+                print("Invalid Mode")
 
+    def encrypt(uppermessage, shift):
+        encrypted_text = ""
+        for char in uppermessage:
+            if char.isalpha():
+                encrypting_value = ord(char) + shift
+                if encrypting_value > ord('Z'):
+                    encrypting_value -= 26
+                encrypted_text += chr(encrypting_value)
+            else:
+                encrypted_text += char
+        return encrypted_text
 
+    def decrypt(uppermessage, shift):
+        decrypted_text = ""
+        for char in uppermessage:
+            if char.isalpha():
+                decrypted_value = ord(char)-shift
+                if decrypted_value < ord("A"):
+                    decrypted_value += 26
+                decrypted_text += chr(decrypted_value)
+            else:
+                decrypted_text += char
+        return decrypted_text
 
+    uppermessage, shift, d_or_e = enter_message()
 
-
-
-
-
-    
-
+    if d_or_e == "e":
+        encrypted_text = encrypt(uppermessage, shift)
+        print("Encrypted message:", encrypted_text)
+    elif d_or_e == "d":
+        decrypted_text = decrypt(uppermessage, shift)
+        print("Decrypted message:", decrypted_text)
+    Yes_or_no = input("Would you like to encrypt or decrypt another message? (y/n): ")
+    if Yes_or_no == "n":
+        print("Thanks for using the program, goodbye!")
+        break
+    else:
+        continue
